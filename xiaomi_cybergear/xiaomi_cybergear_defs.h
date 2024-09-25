@@ -11,9 +11,11 @@
 #define CMD_RAM_WRITE                0x12
 #define CMD_GET_STATUS               0x15
 
+#define ADDR_APP_VERS              0x1003
 #define ADDR_SPEED_KP              0x2014
 #define ADDR_SPEED_KI              0x2015
 #define ADDR_POSITION_KP           0x2016
+#define ADDR_CMD_VBUS_FLOAT        0x3007
 #define ADDR_RUN_MODE              0x7005
 #define ADDR_I_REF                 0x7006
 #define ADDR_SPEED_REF             0x700A
@@ -24,6 +26,7 @@
 #define ADDR_POSITION_REF          0x7016
 #define ADDR_LIMIT_SPEED           0x7017
 #define ADDR_LIMIT_CURRENT         0x7018
+#define ADDR_BUS_CURRENT_IQ        0x701A
 
 #define MODE_MOTION                  0x00
 #define MODE_POSITION                0x01

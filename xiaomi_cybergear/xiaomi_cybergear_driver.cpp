@@ -3,7 +3,7 @@
 
 /* PUBLIC */
 XiaomiCyberGearDriver::XiaomiCyberGearDriver() {};
-XiaomiCyberGearDriver::XiaomiCyberGearDriver(uint8_t cybergear_can_id, uint8_t master_can_id) 
+XiaomiCyberGearDriver::XiaomiCyberGearDriver(uint8_t cybergear_can_id, uint8_t master_can_id)
     : _cybergear_can_id(cybergear_can_id),
     _master_can_id(master_can_id),
     _run_mode(MODE_MOTION),
@@ -164,6 +164,9 @@ void XiaomiCyberGearDriver::request_status() {
     uint8_t data[8] = {0x00};
     _send_can_package(_cybergear_can_id, CMD_GET_STATUS, _master_can_id, 8, data);
 }
+void XiaomiCyberGearDriver::request_vbus() {
+    request_can_float_package(_cybergear_can_id, ADDR_VBUS_FLOAT);
+}
 void XiaomiCyberGearDriver::process_message(const twai_message_t& message){
     uint16_t raw_position = message.data[1] | message.data[0] << 8;
     uint16_t raw_speed = message.data[3] | message.data[2] << 8;
@@ -221,4 +224,9 @@ void XiaomiCyberGearDriver::_send_can_float_package(uint8_t can_id, uint16_t add
     val = (min > value) ? min : value;
     memcpy(&data[4], &val, 4);
     _send_can_package(can_id, CMD_RAM_WRITE, _master_can_id, 8, data);
+}
+void XiaomiCyberGearDriver::request_can_float_package(uint8_t can_id, uint16_t addr){
+    uint8_t data[8] = {0x00};
+    memcpy(&data[0], &addr, 2);
+    _send_can_package(can_id, CMD_RAM_READ, _master_can_id, 8, data);
 }

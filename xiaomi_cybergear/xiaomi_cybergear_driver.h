@@ -59,9 +59,12 @@ class XiaomiCyberGearDriver {
         void set_motor_can_id(uint8_t can_id);
 
         void request_status();
+        void request_vbus();
         void process_message(const twai_message_t& message);
         XiaomiCyberGearStatus get_status() const;
-        
+
+        void request_can_float_package(uint8_t can_id, uint16_t addr);
+
     private:
         uint16_t _float_to_uint(float x, float x_min, float x_max, int bits);
         float _uint_to_float(uint16_t x, float x_min, float x_max);
