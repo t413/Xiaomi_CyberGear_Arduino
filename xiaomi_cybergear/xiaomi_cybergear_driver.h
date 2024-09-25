@@ -65,7 +65,7 @@ class XiaomiCyberGearDriver {
     private:
         uint16_t _float_to_uint(float x, float x_min, float x_max, int bits);
         float _uint_to_float(uint16_t x, float x_min, float x_max);
-        void _send_can_package(uint8_t can_id, uint8_t cmd_id, uint16_t option, uint8_t len, uint8_t* data);
+        void _send_can_package(uint8_t can_id, uint8_t cmd_id, uint16_t option, uint8_t len, uint8_t* data, bool ss=true);
         void _send_can_float_package(uint8_t can_id, uint16_t addr, float value, float min, float max);
 
         uint8_t _cybergear_can_id;
