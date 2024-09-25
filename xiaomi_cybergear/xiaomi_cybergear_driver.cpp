@@ -164,7 +164,7 @@ void XiaomiCyberGearDriver::request_status() {
     uint8_t data[8] = {0x00};
     _send_can_package(_cybergear_can_id, CMD_GET_STATUS, _master_can_id, 8, data);
 }
-void XiaomiCyberGearDriver::process_message(twai_message_t& message){
+void XiaomiCyberGearDriver::process_message(const twai_message_t& message){
     uint16_t raw_position = message.data[1] | message.data[0] << 8;
     uint16_t raw_speed = message.data[3] | message.data[2] << 8;
     uint16_t raw_torque = message.data[5] | message.data[4] << 8;
